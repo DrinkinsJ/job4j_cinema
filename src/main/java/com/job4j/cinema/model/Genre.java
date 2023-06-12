@@ -2,18 +2,16 @@ package com.job4j.cinema.model;
 
 import java.util.Objects;
 
-public class File {
-
+public class Genre {
     private int id;
     private String name;
-    private String path;
 
-    public File() {
+    public Genre() {
     }
 
-    public File(String name, String path) {
+    public Genre(int id, String name) {
+        this.id = id;
         this.name = name;
-        this.path = path;
     }
 
     public int getId() {
@@ -32,14 +30,6 @@ public class File {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -48,12 +38,12 @@ public class File {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        File file = (File) o;
-        return id == file.id && Objects.equals(path, file.path);
+        Genre genre = (Genre) o;
+        return id != genre.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, path);
+        return Objects.hash(id);
     }
 }
