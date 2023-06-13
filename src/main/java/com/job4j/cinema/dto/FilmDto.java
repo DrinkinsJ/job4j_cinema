@@ -1,4 +1,4 @@
-package com.job4j.cinema.model;
+package com.job4j.cinema.dto;
 
 import java.util.Objects;
 

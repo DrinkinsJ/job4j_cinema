@@ -4,7 +4,7 @@ a standard viewing experience without the added depth perception of 3D films. 2D
 screens and sound systems to provide a clear and immersive movie-watching experience.');
 
 insert into halls(name, row_count, place_count, description) values
-('2D Cinema Hall', 8, 12, '3D cinema halls utilize specialized technology to present movies in three dimensions.
+('3D Cinema Hall', 8, 12, '3D cinema halls utilize specialized technology to present movies in three dimensions.
 Viewers wear 3D glasses to perceive depth and experience a more immersive visual presentation. The combination of
 3D visuals and surround sound creates a captivating and lifelike movie experience.');
 

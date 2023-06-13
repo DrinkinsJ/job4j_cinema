@@ -1,8 +1,19 @@
 package com.job4j.cinema.model;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class Film {
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "name", "name",
+            "description", "description",
+            "year", "year",
+            "genreId", "genreId",
+            "minimalAge", "minimalAge",
+            "durationInMinutes", "durationInMinutes",
+            "fileId", "fileId");
 
     private int id;
     private String name;
