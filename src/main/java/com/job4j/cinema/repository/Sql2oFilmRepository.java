@@ -21,7 +21,7 @@ public class Sql2oFilmRepository implements FilmRepository {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM films WHERE id = :id");
             var film = query.addParameter("id", id).executeAndFetchFirst(Film.class);
-            return Optional.of(film);
+            return Optional.ofNullable(film);
         }
     }
 
