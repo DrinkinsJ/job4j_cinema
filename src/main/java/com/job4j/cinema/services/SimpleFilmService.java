@@ -5,11 +5,13 @@ import com.job4j.cinema.model.Film;
 import com.job4j.cinema.repository.FilmRepository;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@ThreadSafe
 public class SimpleFilmService implements FilmService {
 
     private final FilmRepository sql2oFilmRepository;

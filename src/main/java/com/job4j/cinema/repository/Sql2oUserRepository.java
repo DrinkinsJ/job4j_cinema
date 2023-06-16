@@ -19,7 +19,7 @@ public class Sql2oUserRepository implements UserRepository {
     public Optional<User> save(User user) {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("INSERT INTO users(full_name, email, password) VALUES(:full_name, :email, :password)", true)
-                    .addParameter("full_name", user.getFull_name())
+                    .addParameter("full_name", user.getFullName())
                     .addParameter("email", user.getEmail())
                     .addParameter("password", user.getPassword());
             int generatedId = query.executeUpdate().getKey(Integer.class);

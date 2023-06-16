@@ -17,14 +17,14 @@ public class User {
     private String email;
 
     private String password;
-    private String full_name;
+    private String fullName;
 
     public User() {
     }
 
-    public User(int id, String full_name, String email, String password) {
+    public User(int id, String fullName, String email, String password) {
         this.id = id;
-        this.full_name = full_name;
+        this.fullName = fullName;
         this.email = email;
         this.password = password;
     }
@@ -37,12 +37,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -63,8 +63,12 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
         return id == user.id;
     }

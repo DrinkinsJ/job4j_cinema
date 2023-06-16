@@ -4,12 +4,14 @@ import com.job4j.cinema.dto.FileDto;
 import com.job4j.cinema.repository.FileRepository;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
 @Service
+@ThreadSafe
 public class SimpleFileService implements FileService {
 
     private final FileRepository fileRepository;

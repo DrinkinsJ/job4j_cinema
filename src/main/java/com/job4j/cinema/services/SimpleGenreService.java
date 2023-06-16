@@ -4,7 +4,10 @@ import com.job4j.cinema.model.Genre;
 import com.job4j.cinema.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 @Service
+@ThreadSafe
 public class SimpleGenreService implements GenreService {
 
     private final GenreRepository genreRepository;
