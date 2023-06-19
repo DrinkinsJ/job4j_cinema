@@ -3,6 +3,7 @@ package com.job4j.cinema.services;
 import com.job4j.cinema.dto.FilmDto;
 import com.job4j.cinema.model.Film;
 import com.job4j.cinema.repository.FilmRepository;
+import com.job4j.cinema.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -14,34 +15,35 @@ import java.util.stream.Collectors;
 @ThreadSafe
 public class SimpleFilmService implements FilmService {
 
-    private final FilmRepository sql2oFilmRepository;
-    private final GenreService simpleGenreService;
+    private final FilmRepository filmRepository;
+    private final GenreRepository genreRepository;
 
-    public SimpleFilmService(FilmRepository sql2oFilmRepository, GenreService simpleGenreService) {
-        this.sql2oFilmRepository = sql2oFilmRepository;
-        this.simpleGenreService = simpleGenreService;
+    public SimpleFilmService(FilmRepository filmRepository, GenreRepository genreRepository) {
+        this.filmRepository = filmRepository;
+        this.genreRepository = genreRepository;
     }
 
     @Override
     public Optional<FilmDto> findFilmById(int id) {
-        return sql2oFilmRepository.findById(id).map(this::buildFilmDto);
+        return filmRepository.findById(id).stream().map(film -> new FilmDto(film.getId(),
+                film.getName(), film.getDescription(), film.getYear(),
+                film.getMinimalAge(), film.getDurationInMinutes(), genreName(film), film.getFileId())).findAny();
     }
 
     @Override
     public Collection<FilmDto> findAll() {
-        return sql2oFilmRepository.findAll().stream().map(this::buildFilmDto).collect(Collectors.toList());
+        return filmRepository.findAll().stream().map(film -> new FilmDto(film.getId(),
+                        film.getName(), film.getDescription(), film.getYear(),
+                        film.getMinimalAge(), film.getDurationInMinutes(), genreName(film), film.getFileId()))
+                .collect(Collectors.toList());
     }
 
-    private FilmDto buildFilmDto(Film film) {
-        var filmDto = new FilmDto();
-        filmDto.setFileId(film.getFileId());
-        filmDto.setName(film.getName());
-        filmDto.setDescription(film.getDescription());
-        filmDto.setYear(film.getYear());
-        filmDto.setMinimalAge(film.getMinimalAge());
-        filmDto.setDurationInMinutes(film.getDurationInMinutes());
-        filmDto.setGenre(simpleGenreService.getNameGenreById(film.getGenreId()));
-        filmDto.setFileId(film.getFileId());
-        return filmDto;
+    public String genreName(Film film) {
+        String result = null;
+        var genre = genreRepository.findById(film.getGenreId());
+        if (genre.isPresent()) {
+            result = genre.get().getName();
+        }
+        return result;
     }
 }

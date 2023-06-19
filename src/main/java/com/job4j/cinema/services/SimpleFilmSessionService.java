@@ -4,6 +4,7 @@ import com.job4j.cinema.dto.FilmSessionDto;
 import com.job4j.cinema.model.FilmSession;
 import com.job4j.cinema.repository.FilmRepository;
 import com.job4j.cinema.repository.FilmSessionRepository;
+import com.job4j.cinema.repository.HallRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -18,11 +19,13 @@ public class SimpleFilmSessionService implements FilmSessionService {
     private final FilmSessionRepository filmSessionRepository;
     private final FilmRepository filmRepository;
 
-    public SimpleFilmSessionService(FilmSessionRepository filmSessionRepository, FilmRepository filmRepository) {
+    private final HallRepository hallRepository;
+
+    public SimpleFilmSessionService(FilmSessionRepository filmSessionRepository, FilmRepository filmRepository, HallRepository hallRepository) {
         this.filmSessionRepository = filmSessionRepository;
         this.filmRepository = filmRepository;
+        this.hallRepository = hallRepository;
     }
-
 
     @Override
     public Optional<FilmSessionDto> findById(int id) {
@@ -37,11 +40,11 @@ public class SimpleFilmSessionService implements FilmSessionService {
     public FilmSessionDto buildFilmSessionDto(FilmSession filmSession) {
         FilmSessionDto filmSessionDto = new FilmSessionDto();
         filmSessionDto.setSessionId(filmSession.getFilmId());
-        filmSessionDto.setFilmId(filmSession.getFilmId());
-        filmSessionDto.setHallId(filmSession.getHallId());
+        filmSessionDto.setNameFilm(filmRepository.findById(filmSession.getFilmId()).get().getName());
+        filmSessionDto.setNameHall(hallRepository.findById(filmSession.getHallId()).get().getName());
         filmSessionDto.setStartTime(filmSession.getStartTime());
         filmSessionDto.setDurationInMinutes(filmRepository.findById(filmSession.getFilmId()).get().getDurationInMinutes());
-        filmSessionDto.setPrice(filmSessionDto.getPrice());
+        filmSessionDto.setPrice(filmSession.getPrice());
         return filmSessionDto;
     }
 }

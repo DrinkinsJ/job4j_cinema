@@ -26,14 +26,15 @@ public class SimpleFileService implements FileService {
         if (fileOptional.isEmpty()) {
             return Optional.empty();
         }
+        var content = readFileAsBytes(fileOptional.get().getPath());
+        return Optional.of(new FileDto(fileOptional.get().getName(), content));
+    }
+
+    private byte[] readFileAsBytes(String path) {
         try {
-            var path = Path.of(fileOptional.get().getPath());
-            var content = Files.readAllBytes(path);
-            return Optional.of(new FileDto(fileOptional.get().getName(), content));
+            return Files.readAllBytes(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }

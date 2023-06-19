@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class FilmSessionDto {
     private int sessionId;
-    private int filmId;
-    private int hallId;
+    private String nameFilm;
+    private String nameHall;
     private LocalDateTime startTime;
     private int durationInMinutes;
     private int price;
@@ -14,10 +14,10 @@ public class FilmSessionDto {
     public FilmSessionDto() {
     }
 
-    public FilmSessionDto(int sessionId, int filmId, int hallId, LocalDateTime startTime, int durationInMinutes, int price) {
+    public FilmSessionDto(int sessionId, String nameFilm, String nameHall, LocalDateTime startTime, int durationInMinutes, int price) {
         this.sessionId = sessionId;
-        this.filmId = filmId;
-        this.hallId = hallId;
+        this.nameFilm = nameFilm;
+        this.nameHall = nameHall;
         this.startTime = startTime;
         this.durationInMinutes = durationInMinutes;
         this.price = price;
@@ -31,20 +31,20 @@ public class FilmSessionDto {
         this.sessionId = sessionId;
     }
 
-    public int getFilmId() {
-        return filmId;
+    public String getNameFilm() {
+        return nameFilm;
     }
 
-    public void setFilmId(int filmId) {
-        this.filmId = filmId;
+    public void setNameFilm(String nameFilm) {
+        this.nameFilm = nameFilm;
     }
 
-    public int getHallId() {
-        return hallId;
+    public String getNameHall() {
+        return nameHall;
     }
 
-    public void setHallId(int hallId) {
-        this.hallId = hallId;
+    public void setNameHall(String nameHall) {
+        this.nameHall = nameHall;
     }
 
     public LocalDateTime getStartTime() {
@@ -69,22 +69,5 @@ public class FilmSessionDto {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FilmSessionDto that = (FilmSessionDto) o;
-        return sessionId == that.sessionId && filmId == that.filmId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(sessionId, filmId);
     }
 }

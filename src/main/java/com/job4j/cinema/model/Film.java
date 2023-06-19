@@ -10,10 +10,10 @@ public class Film {
             "name", "name",
             "description", "description",
             "year", "year",
-            "genreId", "genreId",
-            "minimalAge", "minimalAge",
-            "durationInMinutes", "durationInMinutes",
-            "fileId", "fileId");
+            "genre_id", "genreId",
+            "minimal_age", "minimalAge",
+            "duration_In_Minutes", "durationInMinutes",
+            "file_Id", "fileId");
 
 
     private int id;
