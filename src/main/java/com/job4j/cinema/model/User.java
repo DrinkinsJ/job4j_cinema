@@ -4,20 +4,17 @@ import java.util.Map;
 import java.util.Objects;
 
 public class User {
-
-    private int id;
-
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
-            "full_name", "full_name",
+            "full_name", "fullName",
             "email", "email",
             "password", "password"
     );
 
-    private String email;
-
-    private String password;
+    private int id;
     private String fullName;
+    private String email;
+    private String password;
 
     public User() {
     }
@@ -70,7 +67,7 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id;
+        return id != user.id;
     }
 
     @Override

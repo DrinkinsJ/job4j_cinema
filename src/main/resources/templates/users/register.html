@@ -29,8 +29,42 @@
     </div>
 </nav>
 <div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <h2 class="text-center text-light mt-5">Sign up</h2>
+            <div class="card my-auto">
+                <div class="text-center">
+                    <img alt="profile"
+                         class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                         src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg" width="200px">
+                </div>
+                <form class="card-body cardboard-color p-lg-5" th:action="@{../users/register}" method="post"
+                      enctype="multipart/form-data">
 
-
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label"><b>Name</b></label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="User name"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label"><b>Email</b></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com"
+                               required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label"><b>Password</b></label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="password"
+                               required>
+                    </div>
+                    <div class="text-lg-center p-lg-5">
+                        <button type="submit" class="btn btn-primary px-5 mb-1 w-100">Save</button>
+                        <button class="btn btn-success px-5 mb-2 w-100" th:href="@{../index}">Cancel</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
 
 
 </div>

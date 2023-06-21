@@ -18,7 +18,7 @@ public class Sql2oUserRepository implements UserRepository {
     @Override
     public Optional<User> save(User user) {
         try (var connection = sql2o.open()) {
-            var query = connection.createQuery("INSERT INTO users(full_name, email, password) VALUES(:full_name, :email, :password)", true)
+            var query = connection.createQuery("INSERT INTO users (full_name, email, password) VALUES (:full_name, :email, :password)", true)
                     .addParameter("full_name", user.getFullName())
                     .addParameter("email", user.getEmail())
                     .addParameter("password", user.getPassword());
@@ -34,7 +34,7 @@ public class Sql2oUserRepository implements UserRepository {
             var query = connection.createQuery("SELECT * FROM users WHERE email = :email AND password = :password")
                     .addParameter("email", email)
                     .addParameter("password", password);
-            var user = query.executeAndFetchFirst(User.class);
+            var user = query.setColumnMappings(User.COLUMN_MAPPING).executeAndFetchFirst(User.class);
             return Optional.ofNullable(user);
         }
     }
