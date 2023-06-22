@@ -21,5 +21,4 @@ public class SimpleGenreService implements GenreService {
         var genreOptional = genreRepository.findById(id);
         return genreOptional.map(Genre::getName).orElse("");
     }
-
 }

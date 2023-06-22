@@ -8,9 +8,9 @@ import java.util.Properties;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class Sql2oFileRepositoryTest {
+public class Sql2oGenreRepositoryTest {
 
-    public static Sql2oFileRepository sql2oFileRepository;
+    private static Sql2oGenreRepository sql2oGenreRepository;
 
     @BeforeAll
     public static void initRepositories() throws Exception {
@@ -27,12 +27,16 @@ public class Sql2oFileRepositoryTest {
         var datasource = configuration.connectionPool(url, username, password);
         var sql2o = configuration.databaseClient(datasource);
 
-        sql2oFileRepository = new Sql2oFileRepository(sql2o);
+        sql2oGenreRepository = new Sql2oGenreRepository(sql2o);
     }
 
     @Test
-    public void whenFindByIdThenReturnFileName() {
-        assertThat(sql2oFileRepository.findById(1).get().getName()).isEqualTo("ALIEN");
+    public void whenFindByIdThenReturnName() {
+        assertThat(sql2oGenreRepository.findById(1).get().getName()).isEqualTo("Action");
     }
 
+    @Test
+    public void whenFindAllThenReturnCountFilms() {
+        assertThat(sql2oGenreRepository.findAll().size()).isEqualTo(7);
+    }
 }

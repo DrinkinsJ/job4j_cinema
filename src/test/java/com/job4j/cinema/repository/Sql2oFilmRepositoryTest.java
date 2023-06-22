@@ -1,19 +1,16 @@
 package com.job4j.cinema.repository;
 
+import com.job4j.cinema.configuration.DatasourceConfiguration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import com.job4j.cinema.configuration.DatasourceConfiguration;
-import com.job4j.cinema.model.Film;
 
-import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class Sql2oFilmRepositoryTest {
+public class Sql2oFilmRepositoryTest {
 
     private static Sql2oFilmRepository sql2oFilmRepository;
-
 
 
     @BeforeAll
@@ -32,13 +29,15 @@ class Sql2oFilmRepositoryTest {
         var sql2o = configuration.databaseClient(datasource);
 
         sql2oFilmRepository = new Sql2oFilmRepository(sql2o);
-        }
-
-        @Test
-        public void test() {
-        var films = sql2oFilmRepository.findAll();
-        for (Film film : films) {
-            System.out.println(film.getId());
-        }
-        }
     }
+
+    @Test
+    public void whenFindByIdThenReturnName() {
+        assertThat(sql2oFilmRepository.findById(1).get().getName()).isEqualTo("ALIEN");
+    }
+
+    @Test
+    public void whenFindAllThenReturnCountFilms() {
+        assertThat(sql2oFilmRepository.findAll().size()).isEqualTo(9);
+    }
+}

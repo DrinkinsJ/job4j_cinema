@@ -29,7 +29,41 @@
     </div>
 </nav>
 <div class="container">
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center text-dark mt-5">Вход</h2>
+                <div class="text-center mb-5 text-dark">в учетную запись</div>
+                <div class="card my-5">
+                    <form class="card-body cardboard-color p-lg-5" th:action="@{../users/login}" method="post">
+                        <div class="text-center">
+                            <img alt="profile"
+                                 class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg" width="200px">
+                        </div>
+                        <div class="mb-3" th:if="${error}">
+                            <p class="text-danger" th:text="${error}"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"><b>Почта</b></label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                                   placeholder="User@email.ru">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label"><b>Пароль</b></label>
+                            <input type="password" class="form-control" id="password" placeholder="password">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary px-5 mb-1 w-100">Войти</button>
+                            <button class="btn btn-success px-5 mb-5 w-100">Отмена</button>
+                        </div>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">Не зарегистрированы?
+                            <a th:href="@{../user/register}" class="text-dark fw-bold"> Зарегистрироваться</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.concurrent.ThreadSafe;
+import javax.servlet.http.HttpServletRequest;
 
 @ThreadSafe
 @Controller
@@ -41,4 +42,17 @@ public class UserController {
         }
         return "redirect:/index";
     }
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        var userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (userOptional.isEmpty()) {
+            model.addAttribute("error", "Incorrect login or password");
+            return "users/login";
+        }
+        var session = request.getSession();
+        session.setAttribute("user", userOptional.get());
+        return "redirect:/index";
+    }
+
 }

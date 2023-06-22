@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-class Sql2oHallRepositoryTest {
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+public class Sql2oHallRepositoryTest {
 
     private static Sql2oHallRepository sql2oHallRepository;
 
@@ -29,17 +31,13 @@ class Sql2oHallRepositoryTest {
     }
 
     @Test
-    public void test() {
-        var halls = sql2oHallRepository.findAll();
-        for (var hall : halls) {
-            System.out.println(hall.getName());
-        }
+    public void whenFindByIdThenReturnName() {
+        assertThat(sql2oHallRepository.findById(1).get().getName()).isEqualTo("2D Cinema Hall");
     }
 
     @Test
-    public void test2() {
-        var hall = sql2oHallRepository.findById(1);
-        System.out.println(hall);
+    public void whenFindAllThenReturnCountFilms() {
+        assertThat(sql2oHallRepository.findAll().size()).isEqualTo(4);
     }
 
 }
