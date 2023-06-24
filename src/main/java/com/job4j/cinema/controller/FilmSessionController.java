@@ -17,7 +17,7 @@ public class FilmSessionController {
 
     @GetMapping("/schedule")
     public String getSchedule(Model model) {
-        model.addAttribute("sessions", filmSessionService.findAll());
+        model.addAttribute("filmSessions", filmSessionService.findAll());
         return "sessions/schedule";
     }
 }
