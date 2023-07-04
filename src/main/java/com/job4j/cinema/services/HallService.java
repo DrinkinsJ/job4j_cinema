@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface HallService {
     Optional<HallDto> findById(int id);
 
-    Collection<HallDto> findALl();
+    Collection<HallDto> findAll();
 }

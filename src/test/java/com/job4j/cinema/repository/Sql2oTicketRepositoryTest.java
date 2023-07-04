@@ -1,8 +1,13 @@
 package com.job4j.cinema.repository;
 
 import com.job4j.cinema.configuration.DatasourceConfiguration;
+import com.job4j.cinema.model.Ticket;
+import com.job4j.cinema.model.User;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +33,12 @@ class Sql2oTicketRepositoryTest {
 
         sql2oTicketRepository = new Sql2oTicketRepository(sql2o);
 
+    }
+
+    @Test
+    public void whenSaveTicketThenEqual() {
+      Ticket ticket = new Ticket(123, 1, 2, 3, 3);
+        assertThat(sql2oTicketRepository.save(ticket)).isEqualTo(Optional.of(ticket));
     }
 
 }

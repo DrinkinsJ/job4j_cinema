@@ -32,7 +32,7 @@ public class SimpleHallService implements HallService {
     }
 
     @Override
-    public Collection<HallDto> findALl() {
+    public Collection<HallDto> findAll() {
         return sql2oHallRepository.findAll().stream().map(this::buildHallDto).collect(Collectors.toList());
     }
 
