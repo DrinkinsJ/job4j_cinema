@@ -1,6 +1,7 @@
 package com.job4j.cinema.controller;
 
 import com.job4j.cinema.model.Ticket;
+import com.job4j.cinema.model.User;
 import com.job4j.cinema.services.FilmSessionService;
 import com.job4j.cinema.services.HallService;
 import com.job4j.cinema.services.TicketService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -35,7 +37,7 @@ public class TicketController {
                                  HttpServletResponse response) {
         var filmSessionOptional = filmSessionService.findById(id);
         if (filmSessionOptional.isEmpty()) {
-            model.addAttribute("message", "Сеанс с указанным идентификатором не найден");
+            model.addAttribute("message", "Cant find film session");
             return "error";
         }
         var hall = hallService.findById(filmSessionOptional.get().getHallId());
@@ -52,21 +54,24 @@ public class TicketController {
     }
 
     @PostMapping("/buying")
-    public String buyTicket(@ModelAttribute Ticket ticket, Model model) {
+    public String buyTicket(@ModelAttribute Ticket ticket, Model model, @CookieValue(value = "session") String session, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        ticket.setUserId(user.getId());
+        ticket.setSessionId(Integer.parseInt(session));
         var ticketOptional = ticketService.save(ticket);
-        System.out.println(ticket.getId());
-        System.out.println(ticket.getPlaceNumber());
-        System.out.println(ticket.getUserId());
-
         if (ticketOptional.isEmpty()) {
-            model.addAttribute("error", "Не удаётся купить билет на указанное место. Попробуйте "
-                    + "другой вариант.");
+            model.addAttribute("error", "Can't buy ticket, try another seat places");
             return "errors/404";
         }
-        String successBuy = String.format("Вы купили билет на %s ряд %s место",
+        String successBuy = String.format("You buy ticket for %s row %s place",
                 ticketOptional.get().getRowNumber(),
                 ticketOptional.get().getPlaceNumber());
         model.addAttribute("message", successBuy);
-        return "redirect:tickets/successBuy";
+        return "tickets/successBuy";
+    }
+
+    @GetMapping("/successBuy")
+    public String success() {
+        return "tickets/successBuy";
     }
 }
