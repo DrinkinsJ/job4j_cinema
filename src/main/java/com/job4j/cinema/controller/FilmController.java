@@ -1,7 +1,6 @@
 package com.job4j.cinema.controller;
 
 import com.job4j.cinema.services.FilmService;
-import com.job4j.cinema.services.FilmSessionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FilmController {
 
     private final FilmService filmService;
-    private final FilmSessionService filmSessionService;
 
-    public FilmController(FilmService filmService, FilmSessionService filmSessionService) {
+    public FilmController(FilmService filmService) {
         this.filmService = filmService;
-        this.filmSessionService = filmSessionService;
     }
 
     @GetMapping("/library")

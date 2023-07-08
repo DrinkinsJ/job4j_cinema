@@ -38,7 +38,7 @@ public class TicketController {
         var filmSessionOptional = filmSessionService.findById(id);
         if (filmSessionOptional.isEmpty()) {
             model.addAttribute("message", "Cant find film session");
-            return "error";
+            return "errors/404";
         }
         var hall = hallService.findById(filmSessionOptional.get().getHallId());
         model.addAttribute("film", filmSessionOptional.get())
