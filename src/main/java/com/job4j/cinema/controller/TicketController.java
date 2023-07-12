@@ -60,7 +60,10 @@ public class TicketController {
         ticket.setSessionId(Integer.parseInt(session));
         var ticketOptional = ticketService.save(ticket);
         if (ticketOptional.isEmpty()) {
-            model.addAttribute("error", "Can't buy ticket, try another seat places");
+            String failedBuy = String.format("You can't buy ticket for %s row %s place, try another seat place",
+                    ticket.getRowNumber(),
+                    ticket.getPlaceNumber());
+            model.addAttribute("message", failedBuy);
             return "errors/404";
         }
         String successBuy = String.format("You buy ticket for %s row %s place",

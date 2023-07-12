@@ -94,7 +94,7 @@ class TicketControllerTest {
     @Test
     public void whenBuyTicketFailedThenRedirectToErrorPage() {
         var ticket = new Ticket();
-        var msg = "Can't buy ticket, try another seat places";
+        var msg = "You can't buy ticket for 0 row 0 place, try another seat place";
         when(ticketService.save(ticket)).thenReturn(Optional.empty());
         var user = new User(1, "name", "email", "password");
         var model = new ConcurrentModel();
@@ -104,7 +104,7 @@ class TicketControllerTest {
         request.setSession(httpSession);
         httpSession.setAttribute("user", user);
         var view = ticketController.buyTicket(ticket, model, sessionCookie, request);
-        var actualMsg = model.getAttribute("error");
+        var actualMsg = model.getAttribute("message");
         assertThat(view).isEqualTo("errors/404");
         assertThat(actualMsg).isEqualTo(msg);
     }
