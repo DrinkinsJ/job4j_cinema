@@ -26,21 +26,21 @@ job4j Cinema Service
 Java 17, Maven 3.8, PostgreSQL 14;
 
 1. Главная страница.  
-![](../../docs/cinema read.me/index.png )  
+![](files/readme_img/index.png)
 2. Расписание фильмов.  
-![](../../docs/cinema read.me/schedule no authorithation.png)
+![](files/readme_img/schedule.png)
 3. Описание/библиотека фильмов.  
-![](../../docs/cinema read.me/library.png)
+![](files/readme_img/library.png)
 4. Страница регистрации.  
-![](../../docs/cinema read.me/register.png)
+![](files/readme_img/register.png)
 5. Страница входа.  
-![](../../docs/cinema read.me/Login.png)
+![](files/readme_img/login.png)
 6. Страница покупки билета, ряд и место можно выбрать, колличество рядов и мест в выпадающих списках, соотвествует залу.  
-![](../../docs/cinema read.me/buying page.png)
+![](files/readme_img/buying_page.png)
 7. Страница успешной покупки. Сюда могут попасть только авторизированые пользователи.  
-![](../../docs/cinema read.me/ticket buy success.png)
+![](files/readme_img/ticket_success.png)
 8. Страница неудачной покупки. Например, место уже куплено.
-![](../../docs/cinema read.me/ticket fail.png)  
+![](files/readme_img/ticket_fail.png)
   
   
 ## ? Мои контакты
