@@ -105,7 +105,7 @@ class TicketControllerTest {
         httpSession.setAttribute("user", user);
         var view = ticketController.buyTicket(ticket, model, sessionCookie, request);
         var actualMsg = model.getAttribute("message");
-        assertThat(view).isEqualTo("errors/404");
+        assertThat(view).isEqualTo("errors/409");
         assertThat(actualMsg).isEqualTo(msg);
     }
 

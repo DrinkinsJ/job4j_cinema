@@ -30,7 +30,7 @@ public class Sql2oUserRepository implements UserRepository {
             user.setId(generatedId);
             return Optional.of(user);
         } catch (Sql2oException e) {
-            LOG.error(e.getMessage(), e);
+            LOG.error("INSERT error", e);
         }
         return Optional.empty();
     }
@@ -53,6 +53,7 @@ public class Sql2oUserRepository implements UserRepository {
                     .executeAndFetch(User.class);
         }
     }
+
     public boolean deleteById(int id) {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("DELETE FROM users WHERE id = :id");

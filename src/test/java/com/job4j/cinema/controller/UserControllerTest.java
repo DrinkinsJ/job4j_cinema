@@ -49,12 +49,15 @@ class UserControllerTest {
     }
 
     @Test
-    public void whenFailedRegisterThenRedirectToErrorPage() {
+    public void whenFailedRegisterThenRedirectToRegistrationPageAndGetMessage() {
+        String msg = "User with this email already exists";
         var model = new ConcurrentModel();
         var user = new User();
         when(userService.save(user)).thenReturn(Optional.empty());
         var view = userController.register(model, user);
-        assertThat(view).isEqualTo("errors/404");
+        var actualMsg = model.getAttribute("message");
+        assertThat(view).isEqualTo("users/register");
+        assertThat(actualMsg).isEqualTo(msg);
     }
 
     @Test

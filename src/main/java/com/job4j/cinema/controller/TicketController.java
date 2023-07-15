@@ -64,7 +64,7 @@ public class TicketController {
                     ticket.getRowNumber(),
                     ticket.getPlaceNumber());
             model.addAttribute("message", failedBuy);
-            return "errors/404";
+            return "errors/409";
         }
         String successBuy = String.format("You buy ticket for %s row %s place",
                 ticketOptional.get().getRowNumber(),
